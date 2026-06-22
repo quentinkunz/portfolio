@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quentin Kunz — Portfolio</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --lav-50: #F3F1FA;
+    --lav-100: #E4E0F4;
+    --lav-200: #C8C0E8;
+    --lav-400: #9D91D0;
+    --lav-600: #7B6BB8;
+    --lav-800: #4E4280;
+    --text: #1e1b2e;
+    --text-muted: #7a748f;
+    --bg: #fafafa;
+    --white: #ffffff;
+    --border: rgba(155,145,208,0.18);
+  }
+  body { font-family: 'Inter','Helvetica Neue',sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+  nav {
+    position: sticky; top: 0;
+    background: rgba(250,250,250,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border); z-index: 100;
+    padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 56px;
+  }
+  .nav-logo { font-size: 15px; font-weight: 600; color: var(--lav-600); letter-spacing: 0.02em; text-decoration: none; cursor: pointer; transition: opacity 0.2s; }
+  .nav-logo:hover { opacity: 0.7; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; font-size: 13px; color: var(--text-muted); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--lav-600); }
+
+  .hero { padding: 5rem 2rem 4rem; max-width: 700px; margin: 0 auto; text-align: center; }
+  .hero-tag {
+    display: inline-block; background: var(--lav-50); color: var(--lav-600);
+    font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 20px; margin-bottom: 1.5rem;
+  }
+  .hero h1 { font-size: clamp(2rem,5vw,3rem); font-weight: 300; color: var(--text); letter-spacing: -0.02em; margin-bottom: 0.5rem; line-height: 1.1; }
+  .hero h1 strong { font-weight: 600; color: var(--lav-600); }
+  .hero p { font-size: 16px; color: var(--text-muted); max-width: 480px; margin: 1rem auto 2rem; line-height: 1.7; }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--lav-600); color: white; text-decoration: none;
+    padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 500; transition: background 0.2s;
+  }
+  .hero-cta:hover { background: var(--lav-800); }
+
+  .stats {
+    display: flex; justify-content: center; gap: 2.5rem; padding: 2.5rem 2rem;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem; background: var(--white);
+  }
+  .stat { text-align: center; }
+  .stat-num { font-size: 22px; font-weight: 600; color: var(--lav-600); display: block; }
+  .stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .stat-sub { font-size: 11px; color: var(--lav-600); font-weight: 500; display: block; margin-top: 2px; }
+
+  section { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
+  .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2rem; }
+  .section-header h2 { font-size: 20px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
+  .section-divider { flex: 1; height: 1px; background: var(--border); }
+
+  .tab-bar { display: flex; gap: 0.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+  .tab {
+    padding: 6px 16px; border-radius: 20px; border: 1px solid var(--border);
+    background: transparent; font-size: 13px; color: var(--text-muted);
+    cursor: pointer; transition: all 0.18s; font-family: inherit;
+  }
+  .tab:hover { border-color: var(--lav-400); color: var(--lav-600); }
+  .tab.active { background: var(--lav-50); border-color: var(--lav-400); color: var(--lav-600); font-weight: 500; }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* Grids */
+  .sort-bar {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 1.5rem;
+  }
+  .sort-label { font-size: 12px; color: var(--text-muted); margin-right: 4px; }
+  .sort-btn {
+    padding: 5px 14px; border-radius: 16px; border: 1px solid var(--border);
+    background: transparent; font-size: 12.5px; color: var(--text-muted);
+    cursor: pointer; transition: all 0.18s; font-family: inherit;
+  }
+  .sort-btn:hover { border-color: var(--lav-400); color: var(--lav-600); }
+  .sort-btn.active { background: var(--lav-600); border-color: var(--lav-600); color: white; font-weight: 500; }
+  .sort-arrow { display: inline-block; font-size: 10px; margin-left: 2px; }
+
+  .insta-grid, .tiktok-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+  .yt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    gap: 2rem;
+  }
+
+  /* Cards */
+  .vid-card {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .vid-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(123,107,184,0.1); }
+
+  .card-meta {
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+  }
+  .card-platform {
+    font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em;
+    padding: 3px 10px; border-radius: 12px;
+  }
+  .platform-insta { background: #fce4f0; color: #a0266f; }
+  .platform-tiktok { background: #e4f7f9; color: #006d78; }
+  .platform-youtube { background: #fde8e8; color: #c00; }
+
+  .card-views {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .card-views svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; }
+
+  /* YouTube miniature */
+  .yt-thumb {
+    position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+    cursor: pointer; background: #1a1a1a; min-height: 180px;
+  }
+  .yt-thumb img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s; display: block; }
+  .yt-thumb:hover img { opacity: 0.8; }
+  .yt-play {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 64px; height: 64px; background: rgba(0,0,0,0.75); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; pointer-events: none; transition: background 0.2s;
+  }
+  .yt-thumb:hover .yt-play { background: #c00; }
+  .yt-play svg { width: 28px; height: 28px; fill: white; margin-left: 4px; }
+  .yt-active { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+  .yt-active iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+  /* Instagram embed */
+  .insta-wrap { background: #f5f3fc; display: flex; justify-content: center; }
+  .insta-wrap .instagram-media { margin: 0 !important; width: 100% !important; min-width: unset !important; max-width: 100% !important; }
+
+  /* TikTok wrap */
+  .tiktok-wrap { background: #f5f3fc; display: flex; justify-content: center; min-height: 500px; align-items: center; }
+  .tiktok-wrap .tiktok-embed { width: 100% !important; min-width: unset !important; }
+
+  .social-row {
+    display: flex; justify-content: center; gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+  .social-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid var(--lav-200);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--lav-600);
+    transition: all 0.2s;
+  }
+  .social-icon:hover {
+    background: var(--lav-600);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(123,107,184,0.25);
+  }
+  .social-icon svg { width: 22px; height: 22px; }
+  .contact-cta { display: flex; width: fit-content; margin: 0 auto; }
+  .contact-section {
+    background: var(--lav-50); border-radius: 16px; padding: 3rem 2rem; text-align: center;
+    max-width: 1200px; margin: 0 auto 4rem;
+  }
+  .contact-section h2 { font-size: 22px; font-weight: 600; color: var(--lav-800); margin-bottom: 0.5rem; }
+  .contact-section p { color: var(--lav-600); font-size: 14px; margin-bottom: 1.5rem; }
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 9px 20px; border-radius: 8px; font-size: 14px; font-weight: 500;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .contact-link.primary { background: var(--lav-600); color: white; }
+  .contact-link.primary:hover { background: var(--lav-800); }
+  .contact-link.secondary { background: white; color: var(--lav-600); border: 1px solid var(--lav-200); }
+  .contact-link.secondary:hover { background: var(--lav-50); }
+
+  footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--border); }
+
+  .hero-flex {
+    display: flex; align-items: center; justify-content: center;
+    gap: 2.5rem; text-align: center;
+  }
+
+  @media (max-width: 600px) {
+    .stats { gap: 1.5rem; flex-wrap: wrap; row-gap: 1.5rem; }
+    .stat { min-width: 42%; }
+    .hero { padding: 3rem 1.25rem 2.5rem; }
+    .hero-flex { flex-direction: column; gap: 1.25rem; }
+    section { padding: 2rem 1.25rem; }
+    .yt-grid { grid-template-columns: 1fr; }
+    .insta-grid, .tiktok-grid { grid-template-columns: 1fr; }
+    .tab-bar { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+    .tab { flex-shrink: 0; }
+  }
+
+  /* ───── CV ───── */
+  #panel-cv { max-width: 860px; margin: 0 auto; }
+
+  .cv-wrap {
+    background: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(123,107,184,0.07);
+  }
+
+  /* Header CV */
+  .cv-header {
+    background: var(--lav-600);
+    padding: 2.5rem 2.5rem 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    color: white;
+  }
+  .cv-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 32px; font-weight: 700; color: white;
+    letter-spacing: -1px;
+  }
+  .cv-header-info { flex: 1; }
+  .cv-name { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.35rem; }
+  .cv-tagline { font-size: 14px; opacity: 0.85; margin-bottom: 1rem; line-height: 1.5; max-width: 520px; }
+  .cv-contacts {
+    display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem;
+  }
+  .cv-contact-item {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12.5px; opacity: 0.9;
+  }
+  .cv-contact-item svg { width: 14px; height: 14px; fill: none; stroke: white; stroke-width: 2; flex-shrink: 0; }
+
+  /* Body CV */
+  .cv-body {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+  }
+
+  /* Colonne gauche */
+  .cv-sidebar {
+    background: var(--lav-50);
+    border-right: 1px solid var(--border);
+    padding: 2rem 1.5rem;
+  }
+
+  /* Colonne droite */
+  .cv-main {
+    padding: 2rem 2rem;
+  }
+
+  /* Sections CV */
+  .cv-section { margin-bottom: 2rem; }
+  .cv-section:last-child { margin-bottom: 0; }
+  .cv-section-title {
+    font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--lav-600); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .cv-section-title::after { content: ''; flex: 1; height: 1px; background: var(--lav-200); }
+  .cv-section-title svg { width: 16px; height: 16px; fill: none; stroke: var(--lav-600); stroke-width: 2; flex-shrink: 0; }
+
+  /* Expériences */
+  .cv-exp { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+  .cv-exp:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .cv-exp-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.25rem; }
+  .cv-exp-title { font-size: 14px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; }
+  .cv-exp-period {
+    font-size: 10.5px; color: white; background: var(--lav-400);
+    padding: 2px 7px; border-radius: 10px; white-space: nowrap; flex-shrink: 0;
+    font-weight: 500;
+  }
+  .cv-exp-company { font-size: 12px; color: var(--lav-600); font-weight: 500; margin-bottom: 0.5rem; }
+  .cv-exp-list { list-style: none; padding: 0; }
+  .cv-exp-list li {
+    font-size: 12.5px; color: var(--text-muted); padding: 2px 0 2px 14px; position: relative; line-height: 1.5;
+  }
+  .cv-exp-list li::before { content: '▸'; position: absolute; left: 0; color: var(--lav-400); font-size: 10px; top: 3px; }
+
+  /* Formations */
+  .cv-edu { margin-bottom: 1.25rem; }
+  .cv-edu:last-child { margin-bottom: 0; }
+  .cv-edu-school { font-size: 13px; font-weight: 600; color: var(--text); }
+  .cv-edu-period { font-size: 11px; color: var(--text-muted); margin-bottom: 2px; }
+  .cv-edu-degree { font-size: 12px; color: var(--lav-600); }
+
+  /* Tags compétences */
+  .cv-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cv-tag {
+    background: var(--lav-100); color: var(--lav-800);
+    font-size: 11.5px; padding: 4px 10px; border-radius: 20px; font-weight: 500;
+  }
+
+  /* Langues */
+
+  .cv-lang-dots { display: flex; gap: 4px; align-items: center; margin-left: 10px; margin-top: 2px; }
+  .cv-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--lav-100); border: 1.5px solid var(--lav-300, var(--lav-200));
+    flex-shrink: 0;
+  }
+  .cv-dot.filled { background: var(--lav-600); border-color: var(--lav-600); }
+
+  .cv-lang-list { display: flex; flex-direction: column; gap: 10px; }
+  .cv-lang-item { display: flex; align-items: flex-start; gap: 8px; }
+  .cv-lang-flag { font-size: 18px; flex-shrink: 0; }
+  .cv-lang-info { display: flex; flex-direction: column; min-width: 80px; }
+  .cv-lang-name { font-size: 12.5px; font-weight: 600; color: var(--text); line-height: 1.2; }
+  .cv-lang-level { font-size: 10px; color: var(--text-muted); }
+  .cv-lang-bar { flex: 1; height: 6px; background: var(--lav-100); border-radius: 10px; overflow: hidden; }
+  .cv-lang-fill { height: 100%; border-radius: 10px; }
+
+
+  .cv-tools-group { margin-bottom: 1rem; }
+  .cv-tools-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .cv-tools-list { font-size: 12.5px; color: var(--text); line-height: 1.8; }
+
+  /* Infos perso sidebar */
+  .cv-info-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12.5px; color: var(--text); margin-bottom: 8px;
+  }
+  .cv-info-item svg { width: 14px; height: 14px; fill: none; stroke: var(--lav-600); stroke-width: 2; flex-shrink: 0; }
+
+  @media (max-width: 700px) {
+    .cv-body { grid-template-columns: 1fr; display: flex; flex-direction: column; }
+    .cv-header { flex-direction: column; gap: 1rem; }
+    .cv-sidebar { border-right: none; border-top: 1px solid var(--border); order: 2; }
+    .cv-main { order: 1; }
+  }
+
+  /* Anti-débordement horizontal global du CV */
+  .cv-wrap, .cv-body, .cv-sidebar, .cv-main,
+  .cv-comp-tags, .cv-tools-group, .cv-section {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .cv-wrap { overflow: hidden; }
+
+
+  .cv-soft-list { list-style: none; padding: 0; margin: 0; }
+  .cv-soft-list li {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 12.5px; color: var(--text);
+    padding: 5px 0; border-bottom: 1px solid var(--border);
+  }
+  .cv-soft-list li:last-child { border-bottom: none; }
+  .cv-soft-list li img {
+    width: 20px; height: 20px; object-fit: contain; flex-shrink: 0;
+    border-radius: 4px;
+  }
+
+
+  .cv-gear-list { list-style: none; padding: 0; margin: 0; }
+  .cv-gear-list li {
+    font-size: 12.5px; color: var(--text);
+    padding: 4px 0 4px 12px; position: relative; border-bottom: 1px solid var(--border); line-height: 1.5;
+  }
+  .cv-gear-list li:last-child { border-bottom: none; }
+  .cv-gear-list li::before { content: "▸"; position: absolute; left: 0; color: var(--lav-400); font-size: 10px; top: 5px; }
+
+
+  .hero-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 580px;
+    margin: 0.75rem auto 0;
+    line-height: 1.7;
+  }
+
+
+  /* ───── PROJETS CRÉATIFS ───── */
+  .projects-intro {
+    font-size: 13px; color: var(--text-muted); margin-bottom: 2rem;
+    padding: 0.75rem 1rem; background: var(--lav-50);
+    border-left: 3px solid var(--lav-400); border-radius: 0 8px 8px 0;
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(123,107,184,0.12);
+  }
+  .project-cover {
+    width: 100%; aspect-ratio: 16/9; object-fit: cover;
+    display: block; background: var(--lav-50);
+  }
+  .project-cover-placeholder {
+    width: 100%; aspect-ratio: 16/9;
+    background: linear-gradient(135deg, var(--lav-50), var(--lav-100));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px;
+  }
+  .project-body { padding: 1rem 1.25rem; flex: 1; display: flex; flex-direction: column; gap: 0.4rem; }
+  .project-title { font-size: 15px; font-weight: 600; color: var(--text); }
+  .project-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; flex: 1; }
+  .project-footer {
+    padding: 0.6rem 1.25rem;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .project-type {
+    font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em;
+    padding: 3px 10px; border-radius: 12px;
+  }
+  .type-boardgame { background: #fff3e0; color: #e65100; }
+  .type-videogame { background: var(--lav-50); color: var(--lav-600); }
+  .project-cta {
+    font-size: 12px; font-weight: 500; color: var(--lav-600);
+    display: flex; align-items: center; gap: 4px;
+  }
+  .project-cta svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; }
+
+
+  /* ───── TREASURE PURSUIT PAGE ───── */
+  #panel-tp { display: none; }
+  #panel-tp.active { display: block; }
+
+  .tp-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; color: var(--lav-600); cursor: pointer;
+    background: none; border: none; font-family: inherit;
+    padding: 0; margin-bottom: 2rem; transition: opacity 0.2s;
+  }
+  .tp-back:hover { opacity: 0.7; }
+  .tp-back svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
+
+  .tp-hero {
+    background: linear-gradient(135deg, #0e4a6e 0%, #1a7a9a 50%, #0e4a6e 100%);
+    border-radius: 16px; overflow: hidden;
+    padding: 3rem 2.5rem;
+    display: flex; align-items: center; gap: 3rem;
+    margin-bottom: 2.5rem; position: relative;
+    color: white;
+  }
+  .tp-hero::before {
+    content: '🏴‍☠️'; font-size: 120px; position: absolute;
+    right: 2rem; top: 50%; transform: translateY(-50%);
+    opacity: 0.12; pointer-events: none;
+  }
+  .tp-hero-text { flex: 1; }
+  .tp-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 20px; margin-bottom: 1rem;
+  }
+  .tp-hero h1 {
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
+    letter-spacing: -0.03em; margin-bottom: 0.5rem; line-height: 1;
+  }
+  .tp-hero h1 span { color: #f4d03f; }
+  .tp-hero p { font-size: 15px; opacity: 0.85; max-width: 480px; line-height: 1.6; margin-bottom: 1.5rem; }
+  .tp-meta-pills { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .tp-pill {
+    background: rgba(255,255,255,0.15); backdrop-filter: blur(4px);
+    padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 500;
+    display: flex; align-items: center; gap: 5px;
+  }
+
+  .tp-body { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+  @media (max-width: 750px) { .tp-body { grid-template-columns: 1fr; } }
+
+  .tp-card {
+    background: var(--white); border-radius: 12px; border: 1px solid var(--border);
+    padding: 1.5rem;
+  }
+  .tp-card-title {
+    font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--lav-600); margin-bottom: 1.25rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .tp-card-title::after { content: ''; flex: 1; height: 1px; background: var(--lav-200); }
+
+  /* Matériel */
+  .tp-material-list { list-style: none; padding: 0; }
+  .tp-material-list li {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 0; border-bottom: 1px solid var(--border);
+    font-size: 13.5px; color: var(--text);
+  }
+  .tp-material-list li:last-child { border-bottom: none; }
+  .tp-material-icon { font-size: 18px; width: 28px; text-align: center; flex-shrink: 0; }
+
+  /* Phases */
+  .tp-phase {
+    border-left: 3px solid var(--lav-400);
+    padding-left: 1rem; margin-bottom: 1.25rem;
+  }
+  .tp-phase:last-child { margin-bottom: 0; }
+  .tp-phase-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--lav-600); margin-bottom: 0.5rem;
+  }
+  .tp-phase p { font-size: 13px; color: var(--text); line-height: 1.6; margin-bottom: 0.5rem; }
+  .tp-phase p:last-child { margin-bottom: 0; }
+  .tp-phase ul { list-style: none; padding: 0; margin-top: 0.5rem; }
+  .tp-phase ul li {
+    font-size: 13px; color: var(--text-muted); padding: 3px 0 3px 14px; position: relative; line-height: 1.5;
+  }
+  .tp-phase ul li::before { content: '▸'; position: absolute; left: 0; color: var(--lav-400); font-size: 10px; top: 4px; }
+
+  /* Combos */
+  .tp-combos { display: flex; flex-direction: column; gap: 6px; }
+  .tp-combo {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--lav-50); border-radius: 8px; padding: 8px 12px;
+    font-size: 13px;
+  }
+  .tp-combo-dice { font-size: 16px; letter-spacing: 1px; flex-shrink: 0; }
+  .tp-combo-effect { color: var(--text); }
+  .tp-combo-effect strong { color: #c0392b; }
+  .tp-combo.bonus .tp-combo-effect strong { color: var(--lav-600); }
+
+  /* Plateaux galerie */
+  .tp-plateaux-title {
+    font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--lav-600); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .tp-plateaux-title::after { content: ''; flex: 1; height: 1px; background: var(--lav-200); }
+  .tp-plateaux-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem;
+  }
+  .tp-plateau-item { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .tp-plateau-img { width: 100%; display: block; aspect-ratio: 16/10; object-fit: cover; }
+  .tp-plateau-label {
+    padding: 0.5rem 0.75rem; font-size: 12px; font-weight: 500; color: var(--text-muted);
+    background: var(--white); border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  @media (max-width: 600px) { .tp-plateaux-grid { grid-template-columns: 1fr; } }
+
+  /* Victoire */
+  .tp-victory {
+    background: linear-gradient(135deg, #f4d03f 0%, #f39c12 100%);
+    border-radius: 12px; padding: 1.5rem 2rem;
+    display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;
+  }
+  .tp-victory-icon { font-size: 40px; flex-shrink: 0; }
+  .tp-victory-text h3 { font-size: 16px; font-weight: 700; color: #7d6608; margin-bottom: 0.25rem; }
+  .tp-victory-text p { font-size: 14px; color: #7d6608; line-height: 1.5; }
+
+
+  @media (max-width: 600px) {
+    .hero { flex-direction: column; text-align: center; }
+    .hero img { width: 90px; height: 90px; }
+  }
+
+
+  .cv-competences { display: flex; flex-direction: column; gap: 0.75rem; }
+  .cv-comp-sub {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--lav-800);
+    margin-top: 0.5rem; margin-bottom: 2px;
+  }
+  .cv-comp-sub:first-child { margin-top: 0; }
+  .cv-comp-list {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px 8px;
+  }
+  .cv-comp-list li {
+    font-size: 12px; color: var(--text);
+    padding: 3px 0 3px 12px; position: relative; line-height: 1.4;
+  }
+  .cv-comp-list li::before {
+    content: "▸"; position: absolute; left: 0;
+    color: var(--lav-400); font-size: 9px; top: 4px;
+  }
+
+
+  .cv-comp-tags {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    margin-bottom: 4px;
+  }
+  .cv-comp-tags .cv-tag {
+    text-align: center;
+    font-size: 11.5px;
+    padding: 4px 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+  .cv-comp-tags .cv-tag.full {
+    grid-column: span 2;
+  }
+
+
+  .cv-tag-logo {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .cv-tag-logo img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 2px;
+  }
+
+
+  /* Hobbys */
+  .cv-hobby-list { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .cv-hobby {
+    background: var(--lav-100); color: var(--lav-800);
+    font-size: 11.5px; font-weight: 500;
+    padding: 4px 10px; border-radius: 20px;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+
+
+  .panel-intro {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    padding: 0.75rem 1rem;
+    background: var(--lav-50);
+    border-left: 3px solid var(--lav-400);
+    border-radius: 0 8px 8px 0;
+    line-height: 1.6;
+  }
+
+
+  .sub-section-title {
+    font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--text-muted); margin: 2rem 0 1rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .sub-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .sub-section-title span {
+    background: var(--lav-50); color: var(--lav-600);
+    font-size: 11px; padding: 2px 8px; border-radius: 10px;
+    border: 1px solid var(--lav-200);
+  }
+
+
+  /* Sous-onglets Instagram / TikTok */
+  .sub-tab-bar { display: flex; gap: 0.5rem; margin: 1rem 0; }
+  .sub-tab {
+    padding: 5px 14px; border-radius: 16px; border: 1px solid var(--border);
+    background: transparent; font-size: 12.5px; color: var(--text-muted);
+    cursor: pointer; transition: all 0.18s; font-family: inherit;
+  }
+  .sub-tab:hover { border-color: var(--lav-400); color: var(--lav-600); }
+  .sub-tab.active { background: var(--lav-600); border-color: var(--lav-600); color: white; font-weight: 500; }
+  .sub-panel { display: none; }
+  .sub-panel.active { display: block; }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#contact" class="nav-logo">Contact</a>
+  <ul class="nav-links">
+  </ul>
+</nav>
+
+<div class="hero hero-flex" style="max-width:860px;">
+  <img src="photo_quentin.png" alt="" style="width:120px;height:120px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid var(--lav-200);box-shadow:0 4px 16px rgba(123,107,184,0.15);" onerror="this.style.display='none'">
+  <div>
+  <span class="hero-tag">Concepteur multimédia</span>
+  <h1><strong>QUENTIN KUNZ</strong></h1>
+  <p>Production vidéo, post-production et stratégie de contenu pour les réseaux sociaux. Basé en Alsace.</p>
+  <p class="hero-sub">Fort d'une expérience de presque 2 ans dans la création de contenu pour les réseaux sociaux et diplômé en développement multimédia et vidéoludique, je maîtrise l'ensemble de la chaîne de production vidéo : de l'idéation à la post-production. Créatif, organisé et jamais à court d'idées, je sais m'adapter aux contraintes éditoriales et aux délais tout en apportant une vraie dynamique créative à l'équipe.</p>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><span class="stat-num">≈ 2 ans</span><span class="stat-label">Expérience</span></div>
+  <div class="stat"><span class="stat-num">59 Reels</span><span class="stat-label">Instagram</span><span class="stat-sub">178,7 M de vues</span></div>
+  <div class="stat"><span class="stat-num">46 vidéos</span><span class="stat-label">TikTok</span><span class="stat-sub">98,6 M de vues</span></div>
+  <div class="stat"><span class="stat-num">4 vidéos</span><span class="stat-label">YouTube</span><span class="stat-sub">377 k de vues</span></div>
+</div>
+
+<section id="work">
+  <div class="tab-bar">
+    <button class="tab active" data-panel="panel-cv">Curriculum Vitae</button>
+    <button class="tab" data-panel="panel-insta">Instagram</button>
+    <button class="tab" data-panel="panel-tiktok">TikTok</button>
+    <button class="tab" data-panel="panel-yt">YouTube</button>
+    <button class="tab" data-panel="panel-projects">Projets vidéoludiques</button>
+  </div>
+
+  <!-- ───── INSTAGRAM ───── -->
+    <div id="panel-insta" class="panel">
+    <!-- Sous-onglets -->
+    <div class="sub-tab-bar">
+      <button class="sub-tab active" data-sub="insta-kelly" data-grid="insta-kelly-grid">Professionnel</button>
+      <button class="sub-tab" data-sub="insta-perso" data-grid="insta-perso-grid">Personnel</button>
+    </div>
+
+    <!-- Intro + tri + vidéos Kelly -->
+    <div id="insta-kelly" class="sub-panel active">
+      <p class="panel-intro">Productions réalisées pour <a href="https://www.instagram.com/kellycz67/" target="_blank" rel="noopener" style="color:var(--lav-600);font-weight:600;">@kellycz67</a>. Selon les vidéos, mon rôle a varié entre montage vidéo, prise de vue et figuration.</p>
+      <div class="sort-bar">
+        <span class="sort-label">Trier par</span>
+        <button class="sort-btn active" data-sort="date" data-dir="desc" data-grid="insta-kelly-grid">Date <span class="sort-arrow">↓</span></button>
+        <button class="sort-btn" data-sort="views" data-grid="insta-kelly-grid">Vues</button>
+      </div>
+      <div class="insta-grid insta-kelly-grid">
+
+      <div class="vid-card" data-order="1" data-views="2300000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DH_uMs1MGQJ/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>2,3 M</span></div></div>
+
+      <div class="vid-card" data-order="2" data-views="1300000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DIMKFlhsA7f/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,3 M</span></div></div>
+
+      <div class="vid-card" data-order="3" data-views="2000000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DIjapl1sBze/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>2 M</span></div></div>
+
+      <div class="vid-card" data-order="4" data-views="12500000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DJE80F4sFWG/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>12,5 M</span></div></div>
+
+      <div class="vid-card" data-order="5" data-views="2000000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DJjzY4YsDcu/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>2 M</span></div></div>
+
+      <div class="vid-card" data-order="6" data-views="2100000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DKAMtUCM54J/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>2,1 M</span></div></div>
+
+      <div class="vid-card" data-order="7" data-views="11400000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DKKZHV_Movj/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>11,4 M</span></div></div>
+
+      <div class="vid-card" data-order="8" data-views="24100000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DKZ8NUwMGpN/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>24,1 M</span></div></div>
+
+      <div class="vid-card" data-order="9" data-views="9000000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DKfF9hsI4Je/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>9 M</span></div></div>
+
+      <div class="vid-card" data-order="10" data-views="5200000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DKzd0A5Is29/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>5,2 M</span></div></div>
+
+      <div class="vid-card" data-order="11" data-views="3700000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DLAmzkAMO56/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>3,7 M</span></div></div>
+
+      <div class="vid-card" data-order="12" data-views="4200000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DLXr7sxoNix/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>4,2 M</span></div></div>
+
+      <div class="vid-card" data-order="13" data-views="5100000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DLxdaRMM38G/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>5,1 M</span></div></div>
+
+      <div class="vid-card" data-order="14" data-views="1900000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DL2jIfNIE2z/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,9 M</span></div></div>
+
+      <div class="vid-card" data-order="15" data-views="1900000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DMVgUP7MbmS/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,9 M</span></div></div>
+
+      <div class="vid-card" data-order="16" data-views="3100000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DMqOaCPMMuy/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>3,1 M</span></div></div>
+
+      <div class="vid-card" data-order="17" data-views="1000000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DM8EnRbMpaY/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1 M</span></div></div>
+
+      <div class="vid-card" data-order="18" data-views="2800000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DNQ6xrRM4mm/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>2,8 M</span></div></div>
+
+      <div class="vid-card" data-order="19" data-views="1300000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DN3frUm2NLv/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,3 M</span></div></div>
+
+      <div class="vid-card" data-order="20" data-views="9000000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DOL09yWjOm6/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>9 M</span></div></div>
+
+      <div class="vid-card" data-order="21" data-views="2500000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DOTyvelDFfV/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>2,5 M</span></div></div>
+
+      <div class="vid-card" data-order="22" data-views="6400000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DOoQZSNjC13/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>6,4 M</span></div></div>
+
+      <div class="vid-card" data-order="23" data-views="2100000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DPOwyFRjBjU/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>2,1 M</span></div></div>
+
+      <div class="vid-card" data-order="24" data-views="8300000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DPeNx6hDFqA/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>8,3 M</span></div></div>
+
+      <div class="vid-card" data-order="25" data-views="1700000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DP4LrhfDJKW/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,7 M</span></div></div>
+
+      <div class="vid-card" data-order="26" data-views="4400000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DQHYL9UDLFd/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>4,4 M</span></div></div>
+
+      <div class="vid-card" data-order="27" data-views="1700000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DQZkGXwDDvg/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,7 M</span></div></div>
+
+      <div class="vid-card" data-order="28" data-views="2300000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DQpEqgPjIfB/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>2,3 M</span></div></div>
+
+      <div class="vid-card" data-order="29" data-views="4200000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DQuFH6QjAbH/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>4,2 M</span></div></div>
+
+      <div class="vid-card" data-order="30" data-views="1800000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DQ9rYIeDFWr/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,8 M</span></div></div>
+
+      <div class="vid-card" data-order="31" data-views="3300000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DRNKp36jE2Q/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>3,3 M</span></div></div>
+
+      <div class="vid-card" data-order="32" data-views="1000000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DRkR_PbDI1j/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1 M</span></div></div>
+
+      <div class="vid-card" data-order="33" data-views="2500000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DRup4aiDG6O/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>2,5 M</span></div></div>
+
+      <div class="vid-card" data-order="34" data-views="816000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DRxG-A6jC3Q/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>816 k</span></div></div>
+
+      <div class="vid-card" data-order="35" data-views="1600000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DSAoJJcDCI5/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,6 M</span></div></div>
+
+      <div class="vid-card" data-order="36" data-views="4000000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DSQH_Z5DE9u/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>4 M</span></div></div>
+
+      <div class="vid-card" data-order="37" data-views="2900000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DSVJAmpjOlV/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>2,9 M</span></div></div>
+
+      <div class="vid-card" data-order="38" data-views="879000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DSaSGn5jNM8/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>879 k</span></div></div>
+
+      <div class="vid-card" data-order="39" data-views="3200000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DSkvtiOjBK3/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>3,2 M</span></div></div>
+
+      <div class="vid-card" data-order="40" data-views="621000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DSnT8SpjHoR/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>621 k</span></div></div>
+
+      <div class="vid-card" data-order="41" data-views="1000000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DTsvakXjLkx/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1 M</span></div></div>
+
+      <div class="vid-card" data-order="42" data-views="742000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DT8OHZhDKlT/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>742 k</span></div></div>
+
+      <div class="vid-card" data-order="43" data-views="2200000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DV81-rKjHTA/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>2,2 M</span></div></div>
+
+      <div class="vid-card" data-order="44" data-views="706000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DWWoHENjLr0/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>706 k</span></div></div>
+
+      <div class="vid-card" data-order="45" data-views="2300000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DWeZfGUjIXU/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>2,3 M</span></div></div>
+
+      <div class="vid-card" data-order="46" data-views="5200000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DW4AEOgjGzL/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>5,2 M</span></div></div>
+
+      <div class="vid-card" data-order="47" data-views="705000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DXUVaJsjE8O/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>705 k</span></div></div>
+
+      <div class="vid-card" data-order="48" data-views="1900000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DXmXhpcjM2w/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,9 M</span></div></div>
+
+      <div class="vid-card" data-order="49" data-views="813000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DYNARcqMPgP/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>813 k</span></div></div>
+
+      <div class="vid-card" data-order="50" data-views="985000"><div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZDHNeRMjle/" data-instgrm-version="14"></blockquote></div><div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>985 k</span></div></div>
+
+    </div>
+    </div>
+
+    <!-- Intro + tri + vidéos perso -->
+    <div id="insta-perso" class="sub-panel">
+      <p class="panel-intro">Vidéos réalisées à titre personnel sur <a href="https://www.instagram.com/error_istg/" target="_blank" rel="noopener" style="color:var(--lav-600);font-weight:600;">@error_istg</a>. Ces créations m'ont permis d'expérimenter différents formats afin de m'entraîner au montage et à la prise de vue.</p>
+      <div class="sort-bar">
+        <span class="sort-label">Trier par</span>
+        <button class="sort-btn active" data-sort="date" data-dir="desc" data-grid="insta-perso-grid">Date <span class="sort-arrow">↓</span></button>
+        <button class="sort-btn" data-sort="views" data-grid="insta-perso-grid">Vues</button>
+      </div>
+      <div class="insta-grid insta-perso-grid">
+      <div class="vid-card" data-order="1" data-views="769">
+        <div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/Cq8C376Ax6h/" data-instgrm-version="14"></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>769</span></div>
+      </div>
+      <div class="vid-card" data-order="2" data-views="223">
+        <div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/CslxMdMgVvN/" data-instgrm-version="14"></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>223</span></div>
+      </div>
+      <div class="vid-card" data-order="3" data-views="636">
+        <div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/CtZTlCHAdk4/" data-instgrm-version="14"></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>636</span></div>
+      </div>
+      <div class="vid-card" data-order="4" data-views="340">
+        <div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/Cyv52mTtZYK/" data-instgrm-version="14"></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>340</span></div>
+      </div>
+      <div class="vid-card" data-order="5" data-views="314">
+        <div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C1NoJBnN2P4/" data-instgrm-version="14"></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>314</span></div>
+      </div>
+      <div class="vid-card" data-order="6" data-views="265">
+        <div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C6YKyu4tkLz/" data-instgrm-version="14"></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>265</span></div>
+      </div>
+      <div class="vid-card" data-order="7" data-views="212">
+        <div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C8aJywNNcL_/" data-instgrm-version="14"></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>212</span></div>
+      </div>
+      <div class="vid-card" data-order="8" data-views="242">
+        <div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C9xv1dPtDle/" data-instgrm-version="14"></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>242</span></div>
+      </div>
+      <div class="vid-card" data-order="9" data-views="795">
+        <div class="insta-wrap"><blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DBer9nttbrc/" data-instgrm-version="14"></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-insta">Instagram</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>795</span></div>
+      </div>
+    </div>
+  </div>
+    </div>
+
+  <div id="panel-tiktok" class="panel">
+    <!-- Sous-onglets -->
+    <div class="sub-tab-bar">
+      <button class="sub-tab active" data-sub="tt-kelly" data-grid="tt-kelly-grid">Professionnel</button>
+      <button class="sub-tab" data-sub="tt-perso" data-grid="tt-perso-grid">Personnel</button>
+    </div>
+
+    <!-- Intro + tri + vidéos Kelly -->
+    <div id="tt-kelly" class="sub-panel active">
+      <p class="panel-intro">Productions réalisées pour <a href="https://www.tiktok.com/@kelly.cruz.67" target="_blank" rel="noopener" style="color:var(--lav-600);font-weight:600;">@kelly.cruz.67</a>. Selon les vidéos, mon rôle a varié entre montage vidéo, prise de vue et figuration.</p>
+      <div class="sort-bar">
+        <span class="sort-label">Trier par</span>
+        <button class="sort-btn active" data-sort="date" data-dir="desc" data-grid="tt-kelly-grid">Date <span class="sort-arrow">↓</span></button>
+        <button class="sort-btn" data-sort="views" data-grid="tt-kelly-grid">Vues</button>
+      </div>
+      <div class="tiktok-grid tt-kelly-grid">
+
+      <div class="vid-card" data-order="1" data-views="271600"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7490958949580180738" data-video-id="7490958949580180738"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>271,6 k</span></div></div>
+
+      <div class="vid-card" data-order="2" data-views="973400"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7494307221702970646" data-video-id="7494307221702970646"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>973,4 k</span></div></div>
+
+      <div class="vid-card" data-order="3" data-views="5000000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7496528922461392150" data-video-id="7496528922461392150"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>5 M</span></div></div>
+
+      <div class="vid-card" data-order="4" data-views="2800000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7499142960529952022" data-video-id="7499142960529952022"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>2,8 M</span></div></div>
+
+      <div class="vid-card" data-order="5" data-views="782500"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7507679879115164950" data-video-id="7507679879115164950"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>782,5 k</span></div></div>
+
+      <div class="vid-card" data-order="6" data-views="26100000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7511390231438904598" data-video-id="7511390231438904598"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>26,1 M</span></div></div>
+
+      <div class="vid-card" data-order="7" data-views="4300000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7512133243529940246" data-video-id="7512133243529940246"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>4,3 M</span></div></div>
+
+      <div class="vid-card" data-order="8" data-views="3000000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7515069898003991830" data-video-id="7515069898003991830"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>3 M</span></div></div>
+
+      <div class="vid-card" data-order="9" data-views="1300000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7519893874354146582" data-video-id="7519893874354146582"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,3 M</span></div></div>
+
+      <div class="vid-card" data-order="10" data-views="1300000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7520288299295001878" data-video-id="7520288299295001878"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,3 M</span></div></div>
+
+      <div class="vid-card" data-order="11" data-views="2200000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7524002676628098326" data-video-id="7524002676628098326"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>2,2 M</span></div></div>
+
+      <div class="vid-card" data-order="12" data-views="886000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7528060937899756822" data-video-id="7528060937899756822"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>886 k</span></div></div>
+
+      <div class="vid-card" data-order="13" data-views="1900000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7532180549604085014" data-video-id="7532180549604085014"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,9 M</span></div></div>
+
+      <div class="vid-card" data-order="14" data-views="295600"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7534756763984350486" data-video-id="7534756763984350486"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>295,6 k</span></div></div>
+
+      <div class="vid-card" data-order="15" data-views="4500000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7546250320662301974" data-video-id="7546250320662301974"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>4,5 M</span></div></div>
+
+      <div class="vid-card" data-order="16" data-views="263100"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7548098868123061526" data-video-id="7548098868123061526"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>263,1 k</span></div></div>
+
+      <div class="vid-card" data-order="17" data-views="3900000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7550347174488313110" data-video-id="7550347174488313110"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>3,9 M</span></div></div>
+
+      <div class="vid-card" data-order="18" data-views="2200000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7558123091478465814" data-video-id="7558123091478465814"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>2,2 M</span></div></div>
+
+      <div class="vid-card" data-order="19" data-views="902200"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7561866305045859606" data-video-id="7561866305045859606"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>902,2 k</span></div></div>
+
+      <div class="vid-card" data-order="20" data-views="3100000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7564051713380896022" data-video-id="7564051713380896022"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>3,1 M</span></div></div>
+
+      <div class="vid-card" data-order="21" data-views="1500000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7568894746123373846" data-video-id="7568894746123373846"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,5 M</span></div></div>
+
+      <div class="vid-card" data-order="22" data-views="1100000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7569633820358577430" data-video-id="7569633820358577430"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,1 M</span></div></div>
+
+      <div class="vid-card" data-order="23" data-views="654500"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7571877390926875926" data-video-id="7571877390926875926"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>654,5 k</span></div></div>
+
+      <div class="vid-card" data-order="24" data-views="1500000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7574113558884011286" data-video-id="7574113558884011286"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,5 M</span></div></div>
+
+      <div class="vid-card" data-order="25" data-views="941900"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7578939451041221910" data-video-id="7578939451041221910"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>941,9 k</span></div></div>
+
+      <div class="vid-card" data-order="26" data-views="1500000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7581529207721872662" data-video-id="7581529207721872662"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,5 M</span></div></div>
+
+      <div class="vid-card" data-order="27" data-views="1800000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7583764415779114263" data-video-id="7583764415779114263"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,8 M</span></div></div>
+
+      <div class="vid-card" data-order="28" data-views="662200"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7584486089868479766" data-video-id="7584486089868479766"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>662,2 k</span></div></div>
+
+      <div class="vid-card" data-order="29" data-views="796300"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7585226692436806934" data-video-id="7585226692436806934"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>796,3 k</span></div></div>
+
+      <div class="vid-card" data-order="30" data-views="365200"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7597111189306346774" data-video-id="7597111189306346774"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>365,2 k</span></div></div>
+
+      <div class="vid-card" data-order="31" data-views="250300"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7599345754079005954" data-video-id="7599345754079005954"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>250,3 k</span></div></div>
+
+      <div class="vid-card" data-order="32" data-views="547800"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7617871145613708566" data-video-id="7617871145613708566"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>547,8 k</span></div></div>
+
+      <div class="vid-card" data-order="33" data-views="9600000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7621858330448907542" data-video-id="7621858330448907542"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>9,6 M</span></div></div>
+
+      <div class="vid-card" data-order="34" data-views="9200000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7626403198512794902" data-video-id="7626403198512794902"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>9,2 M</span></div></div>
+
+      <div class="vid-card" data-order="35" data-views="1500000"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7633085152138136834" data-video-id="7633085152138136834"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>1,5 M</span></div></div>
+
+      <div class="vid-card" data-order="36" data-views="307500"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7638652719032503574" data-video-id="7638652719032503574"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>307,5 k</span></div></div>
+
+      <div class="vid-card" data-order="37" data-views="315100"><div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@kelly.cruz.67/video/7643468924528479520" data-video-id="7643468924528479520"><section></section></blockquote></div><div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>315,1 k</span></div></div>
+
+    </div>
+    </div>
+
+    <!-- Intro + tri + vidéos perso -->
+    <div id="tt-perso" class="sub-panel">
+      <p class="panel-intro">Vidéos réalisées à titre personnel sur <a href="https://www.tiktok.com/@error_tktk" target="_blank" rel="noopener" style="color:var(--lav-600);font-weight:600;">@error_tktk</a>. Ces créations m'ont permis d'expérimenter différents formats afin de m'entraîner au montage et à la prise de vue.</p>
+      <div class="sort-bar">
+        <span class="sort-label">Trier par</span>
+        <button class="sort-btn active" data-sort="date" data-dir="desc" data-grid="tt-perso-grid">Date <span class="sort-arrow">↓</span></button>
+        <button class="sort-btn" data-sort="views" data-grid="tt-perso-grid">Vues</button>
+      </div>
+      <div class="tiktok-grid tt-perso-grid">
+      <div class="vid-card" data-order="1" data-views="17400">
+        <div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@error_tktk/video/7221153588892929285" data-video-id="7221153588892929285"><section></section></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>17,4 k</span></div>
+      </div>
+      <div class="vid-card" data-order="2" data-views="8500">
+        <div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@error_tktk/video/7236394521293049115" data-video-id="7236394521293049115"><section></section></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>8,5 k</span></div>
+      </div>
+      <div class="vid-card" data-order="3" data-views="4800">
+        <div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@error_tktk/video/7243820942651034906" data-video-id="7243820942651034906"><section></section></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>4,8 k</span></div>
+      </div>
+      <div class="vid-card" data-order="4" data-views="8700">
+        <div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@error_tktk/video/7293184228978691361" data-video-id="7293184228978691361"><section></section></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>8,7 k</span></div>
+      </div>
+      <div class="vid-card" data-order="5" data-views="7400">
+        <div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@error_tktk/video/7314805478519819553" data-video-id="7314805478519819553"><section></section></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>7,4 k</span></div>
+      </div>
+      <div class="vid-card" data-order="6" data-views="25200">
+        <div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@error_tktk/video/7362598722984742176" data-video-id="7362598722984742176"><section></section></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>25,2 k</span></div>
+      </div>
+      <div class="vid-card" data-order="8" data-views="12000">
+        <div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@error_tktk/video/7394877825532087585" data-video-id="7394877825532087585"><section></section></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>12 k</span></div>
+      </div>
+      <div class="vid-card" data-order="9" data-views="12200">
+        <div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@error_tktk/video/7428591824140242209" data-video-id="7428591824140242209"><section></section></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>12,2 k</span></div>
+      </div>
+      <div class="vid-card" data-order="7" data-views="9300">
+        <div class="tiktok-wrap"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@error_tktk/video/7382288300033199392" data-video-id="7382288300033199392"><section></section></blockquote></div>
+        <div class="card-meta"><span class="card-platform platform-tiktok">TikTok</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>9,3 k</span></div>
+      </div>
+    </div>
+  </div>
+    </div>
+
+<div id="panel-yt" class="panel">
+    <p class="panel-intro">Productions réalisées pour <strong>Kelly Cruz</strong>. J'ai assuré la prise de vue et le montage sur l'ensemble de ces vidéos.</p>
+    <div class="sort-bar">
+      <span class="sort-label">Trier par</span>
+      <button class="sort-btn active" data-sort="date" data-dir="desc" data-grid="yt-grid">Date <span class="sort-arrow">↓</span></button>
+      <button class="sort-btn" data-sort="views" data-grid="yt-grid">Vues</button>
+    </div>
+    <div class="yt-grid">
+
+      <div class="vid-card" data-order="1" data-views="151000">
+        <a href="https://youtu.be/Nu54rtiTACw" target="_blank" rel="noopener" class="yt-thumb">
+          <img
+            src="https://i.ytimg.com/vi/Nu54rtiTACw/hqdefault.jpg"
+            alt="Vidéo YouTube"
+            referrerpolicy="no-referrer"
+            loading="lazy"
+          >
+          <div class="yt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </a>
+        <div class="card-meta"><span class="card-platform platform-youtube">YouTube</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>151 k</span></div>
+      </div>
+
+      <div class="vid-card" data-order="2" data-views="71000">
+        <a href="https://youtu.be/QOSCKBZo2rg" target="_blank" rel="noopener" class="yt-thumb">
+          <img
+            src="https://i.ytimg.com/vi/QOSCKBZo2rg/hqdefault.jpg"
+            alt="Vidéo YouTube"
+            referrerpolicy="no-referrer"
+            loading="lazy"
+          >
+          <div class="yt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </a>
+        <div class="card-meta"><span class="card-platform platform-youtube">YouTube</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>71 k</span></div>
+      </div>
+
+      <div class="vid-card" data-order="3" data-views="90000">
+        <a href="https://youtu.be/VKqdUqiCoQo" target="_blank" rel="noopener" class="yt-thumb">
+          <img
+            src="https://i.ytimg.com/vi/VKqdUqiCoQo/hqdefault.jpg"
+            alt="Vidéo YouTube"
+            referrerpolicy="no-referrer"
+            loading="lazy"
+          >
+          <div class="yt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </a>
+        <div class="card-meta"><span class="card-platform platform-youtube">YouTube</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>90 k</span></div>
+      </div>
+
+      <div class="vid-card" data-order="4" data-views="65000">
+        <a href="https://youtu.be/2vcLZjdTRfo" target="_blank" rel="noopener" class="yt-thumb">
+          <img
+            src="https://i.ytimg.com/vi/2vcLZjdTRfo/hqdefault.jpg"
+            alt="Vidéo YouTube"
+            referrerpolicy="no-referrer"
+            loading="lazy"
+          >
+          <div class="yt-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        </a>
+        <div class="card-meta"><span class="card-platform platform-youtube">YouTube</span><span class="card-views"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>65 k</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ───── CV ───── -->
+  <div id="panel-cv" class="panel active">
+    <div class="cv-wrap">
+
+      <!-- HEADER -->
+      <div class="cv-header">
+        <div class="cv-avatar">QK</div>
+        <div class="cv-header-info">
+          <div class="cv-name">Quentin Kunz</div>
+
+          <div class="cv-contacts">
+            <span class="cv-contact-item">
+              <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+              quentin.kunz.pro@gmail.com
+            </span>
+            <span class="cv-contact-item">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 12a19.79 19.79 0 01-3.07-8.67A2 2 0 012.86 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              06 23 05 46 19
+            </span>
+            <span class="cv-contact-item">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              03/12/1998 · 27 ans
+            </span>
+            <span class="cv-contact-item">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              84 rue de Bischwiller, Gries, 67240
+            </span>
+            <span class="cv-contact-item">
+              <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              Permis B · véhicule personnel
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BODY -->
+      <div class="cv-body">
+
+        <!-- SIDEBAR -->
+        <div class="cv-sidebar">
+
+          <div class="cv-section">
+            <div class="cv-section-title">
+              <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              Formations
+            </div>
+            <div class="cv-edu">
+              <div class="cv-edu-school">Ludus Académie</div>
+              <div class="cv-edu-period">Strasbourg · 09/2021 – 06/2022</div>
+              <div class="cv-edu-degree">Cycle 2 (Bac+3) — Développeur de Jeux Vidéo</div>
+            </div>
+            <div class="cv-edu">
+              <div class="cv-edu-school">Ludus Académie</div>
+              <div class="cv-edu-period">Strasbourg · 09/2019 – 06/2021</div>
+              <div class="cv-edu-degree">Cycle 1 (Bac+2) — Technicien Informatique et Multimédia</div>
+            </div>
+            <div class="cv-edu">
+              <div class="cv-edu-school">Lycée Louis Couffignal</div>
+              <div class="cv-edu-period">Strasbourg · 09/2017 – 06/2018</div>
+              <div class="cv-edu-degree">Bac STI2D — Sciences et Technologies de l'Industrie et du Développement Durable</div>
+            </div>
+          </div>
+
+          <div class="cv-section">
+            <div class="cv-section-title">
+              <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              Logiciels
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:5px;">
+              <span class="cv-tag cv-tag-logo">
+                <img src="capcut.png" alt="CapCut" onerror="this.style.display='none'">
+                CapCut
+              </span>
+              <span class="cv-tag cv-tag-logo">
+                <img src="vn.png" alt="VN" onerror="this.style.display='none'">
+                VN
+              </span>
+              <span class="cv-tag cv-tag-logo">
+                <img src="figma.png" alt="Figma" onerror="this.style.display='none'">
+                Figma
+              </span>
+              <span class="cv-tag cv-tag-logo">
+                <img src="construct3.png" alt="Construct 3" onerror="this.style.display='none'">
+                Construct 3
+              </span>
+              <span class="cv-tag cv-tag-logo">
+                <img src="sweethome3d.png" alt="Sweet Home 3D" onerror="this.style.display='none'">
+                Sweet Home 3D
+              </span>
+              <span class="cv-tag cv-tag-logo">
+                <img src="office365.png" alt="Microsoft Office 365" onerror="this.style.display='none'">
+                Microsoft Office 365
+              </span>
+              <span class="cv-tag cv-tag-logo">
+                <img src="unreal.png" alt="Unreal Engine" onerror="this.style.display='none'">
+                Unreal Engine 4/5
+              </span>
+            </div>
+          </div>
+
+          <div class="cv-section">
+            <div class="cv-section-title">
+              <svg viewBox="0 0 24 24"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              Matériels
+            </div>
+            <div class="cv-tools-group">
+              <div class="cv-tools-label">Caméra</div>
+              <div class="cv-comp-tags">
+                <span class="cv-tag">Sony ZV-E10</span>
+                <span class="cv-tag">iPhone 16 Pro Max</span>
+                <span class="cv-tag" style="font-size:10px;padding:4px 4px;">DJI Osmo Pocket 3</span>
+                <span class="cv-tag">Insta360 Go Ultra</span>
+              </div>
+            </div>
+            <div class="cv-tools-group">
+              <div class="cv-tools-label">Micro</div>
+              <div class="cv-comp-tags">
+                <span class="cv-tag">DJI Mic 2</span>
+                <span class="cv-tag" style="font-size:10px;padding:4px 4px;">RØDE Videomic Pro+</span>
+              </div>
+            </div>
+            <div class="cv-tools-group">
+              <div class="cv-tools-label">Stabilisateur</div>
+              <div class="cv-comp-tags">
+                <span class="cv-tag">DJI RS4</span>
+              </div>
+            </div>
+            <div class="cv-tools-group">
+              <div class="cv-tools-label">Drone</div>
+              <div class="cv-comp-tags">
+                <span class="cv-tag">DJI Mini 4 Pro</span>
+              </div>
+            </div>
+            <div class="cv-tools-group">
+              <div class="cv-tools-label">Lumière</div>
+              <div class="cv-comp-tags">
+                <span class="cv-tag">Godox SL 60 II Bi</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-section">
+            <div class="cv-section-title">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+              Langues
+            </div>
+            <div class="cv-lang-list">
+              <div class="cv-lang-item">
+                <div class="cv-lang-info">
+                  <span class="cv-lang-name">Français C2</span>
+                  <span class="cv-lang-level">Natif</span>
+                </div>
+                <div class="cv-lang-dots">
+                  <span class="cv-dot filled"></span>
+                  <span class="cv-dot filled"></span>
+                  <span class="cv-dot filled"></span>
+                  <span class="cv-dot filled"></span>
+                  <span class="cv-dot filled"></span>
+                  <span class="cv-dot filled"></span>
+                </div>
+              </div>
+              <div class="cv-lang-item">
+                <div class="cv-lang-info">
+                  <span class="cv-lang-name">Anglais B1</span>
+                  <span class="cv-lang-level">Intermédiaire</span>
+                </div>
+                <div class="cv-lang-dots">
+                  <span class="cv-dot filled"></span>
+                  <span class="cv-dot filled"></span>
+                  <span class="cv-dot filled"></span>
+                  <span class="cv-dot"></span>
+                  <span class="cv-dot"></span>
+                  <span class="cv-dot"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-section">
+            <div class="cv-section-title">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+              Hobbys
+            </div>
+            <div class="cv-hobby-list">
+              <span class="cv-hobby">🔧 Bricolage</span>
+              <span class="cv-hobby">🎵 Musique</span>
+              <span class="cv-hobby">🎮 Jeux vidéo</span>
+              <span class="cv-hobby">🏆 E-Sport</span>
+              <span class="cv-hobby">🎭 Cosplay</span>
+              <span class="cv-hobby">✏️ Dessin</span>
+              <span class="cv-hobby">🎬 Cinéma</span>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:center;margin-top:1.5rem;">
+            <img src="avatar.png" alt="" style="width:130px;height:auto;object-fit:contain;" onerror="this.style.display='none'">
+          </div>
+
+        </div>
+
+        <!-- MAIN -->
+        <div class="cv-main">
+
+          <div class="cv-section">
+            <div class="cv-section-title">
+              <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+              Expériences
+            </div>
+
+            <div class="cv-exp">
+              <div class="cv-exp-header">
+                <div class="cv-exp-title">Concepteur Multimédia — Kelly Cruz</div>
+                <span class="cv-exp-period">06/2025 – 06/2026</span>
+              </div>
+              <div class="cv-exp-company">Bossendorf · CDD</div>
+              <ul class="cv-exp-list">
+                <li>CDI refusé par l'employé</li>
+                <li>Production vidéo / Tournage</li>
+                <li>Montage vidéo courte (TikToks, Réels Instagram)</li>
+                <li>Montage vidéo longue (YouTube)</li>
+                <li>Gestion de planning</li>
+                <li>Réception et test des produits de collaborations commerciales</li>
+                <li>Développement de contenus créatifs</li>
+              </ul>
+            </div>
+
+            <div class="cv-exp">
+              <div class="cv-exp-header">
+                <div class="cv-exp-title">Assistant Chef de Projet — Kelly Cruz</div>
+                <span class="cv-exp-period">03/2025 – 04/2025</span>
+              </div>
+              <div class="cv-exp-company">Bossendorf · CDD</div>
+              <ul class="cv-exp-list">
+                <li>Production vidéo / Tournage</li>
+                <li>Montage vidéo courte (TikToks, Réels Instagram)</li>
+                <li>Réception et test des produits de collaborations commerciales</li>
+                <li>Développement de contenus créatifs</li>
+              </ul>
+            </div>
+
+            <div class="cv-exp">
+              <div class="cv-exp-header">
+                <div class="cv-exp-title">Préparateur de commandes — Auchan Drive</div>
+                <span class="cv-exp-period">01/2020 – 11/2024</span>
+              </div>
+              <div class="cv-exp-company">Strasbourg · CDI</div>
+              <ul class="cv-exp-list">
+                <li>Préparation et livraison des commandes dans le véhicule du client</li>
+                <li>Gestion informatique et approvisionnement du stock</li>
+                <li>Accompagnement client</li>
+              </ul>
+            </div>
+
+            <div class="cv-exp">
+              <div class="cv-exp-header">
+                <div class="cv-exp-title">Préparateur de commandes — SDAG Adhésif</div>
+                <span class="cv-exp-period">03/2019 – 10/2019</span>
+              </div>
+              <div class="cv-exp-company">Weyersheim · Intérim</div>
+              <ul class="cv-exp-list">
+                <li>Préparation et emballage des commandes</li>
+                <li>Approvisionnement du stock</li>
+              </ul>
+            </div>
+
+            <div class="cv-exp">
+              <div class="cv-exp-header">
+                <div class="cv-exp-title">Vendeur indépendant — Tupperware</div>
+                <span class="cv-exp-period">01/2018 – 09/2019</span>
+              </div>
+              <div class="cv-exp-company">Strasbourg · CDD</div>
+              <ul class="cv-exp-list">
+                <li>Présentation et ventes des produits</li>
+                <li>Organisations de réunions et comptes rendus</li>
+                <li>Encaissement</li>
+              </ul>
+            </div>
+
+            <div class="cv-exp">
+              <div class="cv-exp-header">
+                <div class="cv-exp-title">Agent contractuel — Direct° des Finances Publiques</div>
+                <span class="cv-exp-period">01/2019 – 02/2019</span>
+              </div>
+              <div class="cv-exp-company">Strasbourg · CDD</div>
+              <ul class="cv-exp-list">
+                <li>Fixation informatique des prélèvements bancaires</li>
+                <li>Suivi téléphonique</li>
+                <li>Tri du courrier</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="cv-section">
+            <div class="cv-section-title">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              Compétences
+            </div>
+            <div class="cv-competences">
+
+              <div class="cv-comp-sub">Création de contenu</div>
+              <div class="cv-comp-tags">
+                <span class="cv-tag">Tournage vidéo</span>
+                <span class="cv-tag">Montage vidéo</span>
+                <span class="cv-tag">Gestion de planning</span>
+                <span class="cv-tag">Stratégie de contenu</span>
+              </div>
+
+              <div class="cv-comp-sub">Esprit créatif</div>
+              <div class="cv-comp-tags">
+                <span class="cv-tag">Optimisation</span>
+                <span class="cv-tag" style="font-size:10px;padding:4px 4px;">Veille concurrentielle</span>
+                <span class="cv-tag">Culture internet</span>
+                <span class="cv-tag">Idéation créative</span>
+              </div>
+
+              <div class="cv-comp-sub">Vente</div>
+              <div class="cv-comp-tags">
+                <span class="cv-tag">Présentation produit</span>
+                <span class="cv-tag">Service client</span>
+              </div>
+
+              <div class="cv-comp-sub">Rédaction</div>
+              <div class="cv-comp-tags">
+                <span class="cv-tag">Cahier des charges</span>
+                <span class="cv-tag">Articles</span>
+              </div>
+
+              <div class="cv-comp-sub">Esprit d'équipe</div>
+              <div class="cv-comp-tags">
+                <span class="cv-tag">Sociable</span>
+                <span class="cv-tag">Communiquant</span>
+                <span class="cv-tag">Autonome</span>
+                <span class="cv-tag">Optimiste</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:1.5rem;">
+      <a href="CV_Quentin_Kunz.pdf" download class="hero-cta" style="display:inline-flex;">
+        Télécharger CV
+      </a>
+    </div>
+  </div>
+
+
+  <!-- ───── PROJETS CRÉATIFS ───── -->
+  <div id="panel-projects" class="panel">
+    <p class="projects-intro">Projets réalisés lors de ma formation à <strong>Ludus Académie</strong> (2019–2022) — game design, programmation et conception.</p>
+    <div class="projects-grid">
+
+      <!-- Treasure Pursuit -->
+      <a href="#" onclick="openTP(event)" class="project-card">
+        <img class="project-cover" src="plateau1.jpg" alt="Treasure Pursuit">
+        <div class="project-body">
+          <div class="project-title">Treasure Pursuit</div>
+          <div class="project-desc">Lancez des dés afin de récupérer du magot, affrontez vos adversaires et soyez le pirate le plus riche !</div>
+        </div>
+        <div class="project-footer">
+          <span class="project-type type-boardgame">Jeu de société</span>
+          <span class="project-cta">Voir <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Sovoladro -->
+      <a href="https://rebmap.itch.io/sovoladro-the-game" target="_blank" rel="noopener" class="project-card">
+        <img class="project-cover" src="https://img.itch.zone/aW1nLzY2NTY5NjgucG5n/original/NeXLvW.png" alt="Sovoladro: The Game" onerror="this.style.display='none'">
+        <div class="project-body">
+          <div class="project-title">Sovoladro: The Game</div>
+          <div class="project-desc">Vous êtes dans un jeu rétro inachevé et les éléments nécessaires pour le terminer n'ont jamais été créés. Peut-être trouverez-vous ce dont vous avez besoin en explorant le monde réel ?</div>
+        </div>
+        <div class="project-footer">
+          <span class="project-type type-videogame">Jeu vidéo · Construct</span>
+          <span class="project-cta">Jouer <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Green Team -->
+      <a href="https://error-project.itch.io/green-team" target="_blank" rel="noopener" class="project-card">
+        <img class="project-cover" src="https://img.itch.zone/aW1nLzYxMjE5NTIuanBn/original/szdKKp.jpg" alt="Green Team" onerror="this.style.display='none'">
+        <div class="project-body">
+          <div class="project-title">Green Team</div>
+          <div class="project-desc">Dans un monde d'animaux anthropomorphiques, incarnez un dirigeant et, à l'aide de vos conseillers, aménagez votre future réélection en satisfaisant votre électorat.</div>
+        </div>
+        <div class="project-footer">
+          <span class="project-type type-videogame">Jeu vidéo · Construct</span>
+          <span class="project-cta">Jouer <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Run'Ard -->
+      <a href="https://error-project.itch.io/runard" target="_blank" rel="noopener" class="project-card">
+        <img class="project-cover" src="https://img.itch.zone/aW1nLzc2MTA4NDguanBn/original/U%2FHsxk.jpg" alt="Run'Ard" onerror="this.style.display='none'">
+        <div class="project-body">
+          <div class="project-title">Run'Ard</div>
+          <div class="project-desc">Aidez votre petit renard à sauter par dessus les obstacles en écrivant, le plus vite possible, le mot affiché à l'écran !</div>
+        </div>
+        <div class="project-footer">
+          <span class="project-type type-videogame">Jeu vidéo · Unreal Engine</span>
+          <span class="project-cta">Télécharger <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+        </div>
+      </a>
+
+      <!-- Nouvel Univers Louche -->
+      <a href="https://error-project.itch.io/nul" target="_blank" rel="noopener" class="project-card">
+        <img class="project-cover" src="https://img.itch.zone/aW1nLzg5NjY5NjkuanBn/original/mJX1NS.jpg" alt="Nouvel Univers Louche" onerror="this.style.display='none'">
+        <div class="project-body">
+          <div class="project-title">Nouvel Univers Louche</div>
+          <div class="project-desc">Un RPG en temps réel parodique qui traite de sujets très limites.</div>
+        </div>
+        <div class="project-footer">
+          <span class="project-type type-videogame">Jeu vidéo · Unreal Engine</span>
+          <span class="project-cta">Télécharger <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+
+  <!-- ───── TREASURE PURSUIT PAGE ───── -->
+  <div id="panel-tp" class="panel">
+
+    <button class="tp-back" onclick="closeTP()">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Retour aux projets
+    </button>
+
+    <!-- HERO -->
+    <div class="tp-hero">
+      <div class="tp-hero-text">
+        <span class="tp-badge">🏴‍☠️ Jeu de société · Party Game</span>
+        <h1>Treasure<br><span>Pursuit</span></h1>
+        <p>Lancez des dés afin de récupérer du magot, affrontez vos adversaires qui ont plus de trésor que vous et soyez le pirate le plus riche !</p>
+        <div class="tp-meta-pills">
+          <span class="tp-pill">👥 2 – 4 joueurs</span>
+          <span class="tp-pill">🎲 6 dés</span>
+          <span class="tp-pill">🏆 Premier à 100 pts</span>
+          <span class="tp-pill">📋 Carnet de score</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CORPS -->
+    <div class="tp-body">
+
+      <!-- Matériel -->
+      <div class="tp-card">
+        <div class="tp-card-title">Matériel</div>
+        <ul class="tp-material-list">
+          <li><span class="tp-material-icon">🗺️</span> 4 Plateaux de jeu (un par joueur)</li>
+          <li><span class="tp-material-icon">🎲</span> 6 Dés classiques</li>
+          <li><span class="tp-material-icon">🎲</span> 1 Dé (couleur différente)</li>
+          <li><span class="tp-material-icon">🪙</span> 1 Pièce</li>
+          <li><span class="tp-material-icon">📓</span> Un carnet (pour noter les scores)</li>
+        </ul>
+      </div>
+
+      <!-- Règles -->
+      <div class="tp-card">
+        <div class="tp-card-title">Déroulement</div>
+
+        <div class="tp-phase">
+          <div class="tp-phase-label">Mise en place</div>
+          <p>Chaque joueur choisit son plateau. Le tour se fait dans le sens des aiguilles d'une montre, en commençant par le joueur le plus jeune.</p>
+        </div>
+
+        <div class="tp-phase">
+          <div class="tp-phase-label">Phase 1 — Constituer son équipage</div>
+          <p>À votre tour, lancez les <strong>6 dés</strong>. Pour que le tour soit valide, il vous faut un <strong>6</strong>, un <strong>5</strong> et un <strong>4</strong> :</p>
+          <ul>
+            <li>🚢 Le <strong>6</strong> = votre Bateau</li>
+            <li>🧔 Le <strong>5</strong> = votre Capitaine</li>
+            <li>⚓ Le <strong>4</strong> = votre Équipage</li>
+          </ul>
+          <p>Vous avez droit à <strong>3 lancers</strong>. Sans les 3 chiffres requis, vous perdez votre tour. Sinon, les 3 dés restants constituent votre magot initial — placez-les dans la cale de votre bateau et passez en Phase 2.</p>
+        </div>
+
+        <div class="tp-phase">
+          <div class="tp-phase-label">Phase 2 — Accumuler le magot</div>
+          <p>À chaque tour, lancez vos <strong>3 dés</strong> (3 lancers max). Le résultat s'additionne à votre magot total. Des combinaisons spéciales peuvent impacter vos adversaires !</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Combinaisons -->
+    <div class="tp-card" style="margin-bottom:2rem">
+      <div class="tp-card-title">Combinaisons spéciales</div>
+      <div class="tp-combos">
+        <div class="tp-combo"><span class="tp-combo-dice">⚀⚀⚀</span><span class="tp-combo-effect">Triple 1 — <strong>− 25 pts</strong> à un adversaire</span></div>
+        <div class="tp-combo"><span class="tp-combo-dice">⚁⚁⚁</span><span class="tp-combo-effect">Triple 2 — <strong>− 20 pts</strong> à un adversaire</span></div>
+        <div class="tp-combo"><span class="tp-combo-dice">⚂⚂⚂</span><span class="tp-combo-effect">Triple 3 — <strong>− 15 pts</strong> à un adversaire</span></div>
+        <div class="tp-combo"><span class="tp-combo-dice">⚃⚃⚃</span><span class="tp-combo-effect">Triple 4 — <strong>− 10 pts</strong> à un adversaire</span></div>
+        <div class="tp-combo"><span class="tp-combo-dice">⚄⚄⚄</span><span class="tp-combo-effect">Triple 5 — <strong>− 5 pts</strong> à un adversaire</span></div>
+        <div class="tp-combo"><span class="tp-combo-dice">⚅⚅⚅</span><span class="tp-combo-effect">Triple 6 — <strong>− 1 pt</strong> à un adversaire</span></div>
+        <div class="tp-combo bonus"><span class="tp-combo-dice">⚀⚁⚂</span><span class="tp-combo-effect">Suite — <strong>Lancer bonus</strong> à utiliser quand vous voulez</span></div>
+      </div>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:1rem;">L'adversaire ciblé est choisi au hasard : avec une pièce (2 adversaires) ou un dé où chacun choisit deux faces qui le représentent.</p>
+    </div>
+
+    <!-- Condition de victoire -->
+    <div class="tp-victory">
+      <div class="tp-victory-icon">🏆</div>
+      <div class="tp-victory-text">
+        <h3>Condition de victoire</h3>
+        <p>Le premier joueur à atteindre <strong>100 points de magot</strong> remporte la partie. Les scores sont notés tour par tour dans un carnet sous forme de tableau.</p>
+      </div>
+    </div>
+
+    <!-- Plateaux -->
+    <div class="tp-plateaux-title">Les 4 plateaux de jeu</div>
+    <div class="tp-plateaux-grid">
+      <div class="tp-plateau-item">
+        <img class="tp-plateau-img" src="plateau1.jpg" alt="Plateau Fluffy">
+        <div class="tp-plateau-label">🏴‍☠️ Mon Qui-dit Fluffy</div>
+      </div>
+      <div class="tp-plateau-item">
+        <img class="tp-plateau-img" src="plateau2.jpg" alt="Plateau Terapod">
+        <div class="tp-plateau-label">⚔️ Le Gars du Brunch Terapod</div>
+      </div>
+      <div class="tp-plateau-item">
+        <img class="tp-plateau-img" src="plateau3.jpg" alt="Plateau CéParou">
+        <div class="tp-plateau-label">❓ Jacques CéParou</div>
+      </div>
+      <div class="tp-plateau-item">
+        <img class="tp-plateau-img" src="plateau4.jpg" alt="Plateau Barbe Tord">
+        <div class="tp-plateau-label">🗡️ Barbe Tord</div>
+      </div>
+    </div>
+
+  </div>
+
+
+</section>
+
+<div class="contact-section" id="contact">
+  <div class="social-row">
+    <a href="https://www.linkedin.com/in/quentin-kunz-038bbb248/" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 110-4.13 2.07 2.07 0 010 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/error_istg/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.02-3.58.07-4.85c.15-3.23 1.67-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.69.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1012 18.16 6.16 6.16 0 0012 5.84zm0 10.16a4 4 0 110-8 4 4 0 010 8zm6.41-10.41a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/></svg>
+    </a>
+    <a href="https://www.tiktok.com/@error_tktk" target="_blank" rel="noopener" class="social-icon" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 014.31-3.79V10.1a6.33 6.33 0 00-5.42 11.45 6.33 6.33 0 0010.86-4.43V8.74a8.16 8.16 0 004.66 1.46V6.79a4.85 4.85 0 01-1.99-.1z"/></svg>
+    </a>
+  </div>
+
+  <h2>On travaille ensemble ?</h2>
+  <p>Disponible pour de la production vidéo, de la création de contenu et du community management.</p>
+
+  <a href="mailto:quentin.kunz.pro@gmail.com" class="contact-link primary contact-cta">✉ Me contacter</a>
+</div>
+
+<footer>© 2026 Quentin Kunz — Concepteur multimédia, Alsace</footer>
+
+<script async src="https://www.instagram.com/embed.js"></script>
+<script async src="https://www.tiktok.com/embed.js"></script>
+<script>
+  function openTP(e) {
+    e.preventDefault();
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('panel-tp').classList.add('active');
+    window.scrollTo({top: document.getElementById('work').offsetTop - 70, behavior: 'smooth'});
+  }
+  function closeTP() {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('panel-projects').classList.add('active');
+    document.querySelector('[data-panel="panel-projects"]').classList.add('active');
+    window.scrollTo({top: document.getElementById('work').offsetTop - 70, behavior: 'smooth'});
+  }
+
+  function loadYT(el, id) {
+    const wrap = document.createElement('div');
+    wrap.className = 'yt-active';
+    wrap.innerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>';
+    el.replaceWith(wrap);
+  }
+
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.panel).classList.add('active');
+      if (tab.dataset.panel === 'panel-insta' && window.instgrm) window.instgrm.Embeds.process();
+      if (tab.dataset.panel === 'panel-tiktok' && window.tiktok) window.tiktok.embed.lib.render();
+    });
+  });
+
+  // ───── TRI DES VIDÉOS (date / vues, asc / desc) ─────
+  function sortGrid(grid, sortType, dir) {
+    if (!grid) return;
+    const cards = Array.from(grid.children);
+    cards.sort((a, b) => {
+      let valA, valB;
+      if (sortType === 'views') {
+        valA = parseInt(a.dataset.views || 0);
+        valB = parseInt(b.dataset.views || 0);
+      } else {
+        valA = parseInt(a.dataset.order || 0);
+        valB = parseInt(b.dataset.order || 0);
+      }
+      return dir === 'desc' ? valB - valA : valA - valB;
+    });
+    cards.forEach(card => grid.appendChild(card));
+  }
+
+  document.querySelectorAll('.sort-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const gridClass = btn.dataset.grid;
+      const sortType = btn.dataset.sort;
+      const grid = document.querySelector('.' + gridClass);
+      if (!grid) return;
+
+      const barButtons = btn.parentElement.querySelectorAll('.sort-btn');
+
+      // Si on reclique sur le bouton déjà actif → inverser le sens (uniquement pour le tri par date)
+      if (btn.classList.contains('active') && sortType === 'date') {
+        btn.dataset.dir = btn.dataset.dir === 'desc' ? 'asc' : 'desc';
+      } else if (!btn.classList.contains('active')) {
+        // Nouveau bouton sélectionné → reset sur desc par défaut
+        barButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        btn.dataset.dir = 'desc';
+      }
+
+      // Mettre à jour la flèche affichée
+      const arrow = btn.querySelector('.sort-arrow');
+      if (arrow) arrow.textContent = btn.dataset.dir === 'desc' ? '↓' : '↑';
+
+      const dir = sortType === 'views' ? 'desc' : btn.dataset.dir;
+      sortGrid(grid, sortType, dir);
+
+      // Re-render les embeds après réordonnancement
+      if (gridClass === 'insta-grid' && window.instgrm) window.instgrm.Embeds.process();
+      if (gridClass === 'tiktok-grid' && window.tiktok) window.tiktok.embed.lib.render();
+    });
+  });
+
+  // Tri initial au chargement : du plus récent au plus ancien sur toutes les grilles
+  ['insta-kelly-grid', 'insta-perso-grid', 'tt-kelly-grid', 'tt-perso-grid', 'yt-grid'].forEach(gridClass => {
+    const grid = document.querySelector('.' + gridClass);
+    if (grid) sortGrid(grid, 'date', 'desc');
+  });
+
+  // ───── AUTO-FIT DES TITRES D'EXPÉRIENCE (rétrécit uniquement si ça déborde) ─────
+  // ───── SOUS-ONGLETS Instagram / TikTok ─────
+  document.querySelectorAll('.sub-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const subId = btn.dataset.sub;
+      const bar = btn.parentElement;
+
+      // Activer le sous-onglet cliqué
+      bar.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Afficher le bon sous-panel
+      const parentPanel = bar.closest('.panel');
+      parentPanel.querySelectorAll('.sub-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(subId).classList.add('active');
+
+      // Re-render les embeds
+      if (subId.includes('insta') && window.instgrm) window.instgrm.Embeds.process();
+      if (subId.includes('tt') && window.tiktok) window.tiktok.embed.lib.render();
+
+      // Appliquer le tri initial (date desc) sur la grille qui vient d'apparaître
+      const gridClass = btn.dataset.grid;
+      const grid = document.querySelector('.' + gridClass);
+      if (grid) sortGrid(grid, 'date', 'desc');
+    });
+  });
+
+  function fitExpTitles() {
+    document.querySelectorAll('.cv-exp-title').forEach(el => {
+      // Reset à la taille de base avant de mesurer
+      el.style.fontSize = '';
+      const baseSize = parseFloat(getComputedStyle(el).fontSize);
+      let size = baseSize;
+      const minSize = 8; // taille plancher pour rester lisible
+
+      // Tant que le texte déborde sur 2 lignes (scrollHeight > une ligne) ou dépasse la largeur, on réduit
+      while (el.scrollWidth > el.clientWidth && size > minSize) {
+        size -= 0.5;
+        el.style.fontSize = size + 'px';
+      }
+    });
+  }
+
+  window.addEventListener('load', fitExpTitles);
+  window.addEventListener('resize', fitExpTitles);
+  // Relancer aussi quand on ouvre l'onglet CV (les éléments cachés ont clientWidth=0 tant qu'ils ne sont pas affichés)
+  document.querySelectorAll('[data-panel="panel-cv"]').forEach(btn => {
+    btn.addEventListener('click', () => setTimeout(fitExpTitles, 50));
+  });
+</script>
+
+</body>
+</html>
