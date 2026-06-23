@@ -688,6 +688,16 @@
 
   /* Hobbys */
   .cv-hobby-list { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .cv-logiciels-list { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
+  @media (max-width: 700px) {
+    .cv-logiciels-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      width: 100%;
+    }
+    .cv-logiciels-list .cv-tag { width: 100%; box-sizing: border-box; }
+  }
   .cv-hobby-avatar-row { display: flex; align-items: flex-end; gap: 0.5rem; }
   .cv-avatar-mobile { display: none; }
 
@@ -1222,7 +1232,7 @@
               <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
               Logiciels
             </div>
-            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:5px;">
+            <div class="cv-logiciels-list">
               <span class="cv-tag cv-tag-logo">
                 <img src="capcut.png" alt="CapCut" onerror="this.style.display='none'">
                 CapCut
