@@ -1375,7 +1375,7 @@
               </div>
               <div class="cv-exp-company">Bossendorf · CDD</div>
               <ul class="cv-exp-list">
-                <li>CDI refusé par l'employé</li>
+                
                 <li>Production vidéo / Tournage</li>
                 <li>Montage vidéo courte (TikToks, Réels Instagram)</li>
                 <li>Montage vidéo longue (YouTube)</li>
@@ -1390,7 +1390,7 @@
                 <div class="cv-exp-title">Assistant Chef de Projet — Kelly Cruz</div>
                 <span class="cv-exp-period">03/2025 – 04/2025</span>
               </div>
-              <div class="cv-exp-company">Bossendorf · CDD</div>
+              <div class="cv-exp-company">Bossendorf · Stage</div>
               <ul class="cv-exp-list">
                 <li>Production vidéo / Tournage</li>
                 <li>Montage vidéo courte (TikToks, Réels Instagram)</li>
@@ -1490,7 +1490,7 @@
               <div class="cv-comp-sub">Esprit d'équipe</div>
               <div class="cv-comp-tags">
                 <span class="cv-tag">Sociable</span>
-                <span class="cv-tag">Communiquant</span>
+                <span class="cv-tag">Communicatif</span>
                 <span class="cv-tag">Autonome</span>
                 <span class="cv-tag">Optimiste</span>
               </div>
@@ -1843,16 +1843,23 @@
 
   function fitExpTitles() {
     document.querySelectorAll('.cv-exp-title').forEach(el => {
-      // Reset à la taille de base avant de mesurer
+      // Reset
       el.style.fontSize = '';
+      el.style.whiteSpace = 'nowrap';
       const baseSize = parseFloat(getComputedStyle(el).fontSize);
       let size = baseSize;
-      const minSize = 8; // taille plancher pour rester lisible
+      const minSize = 11;
 
-      // Tant que le texte déborde sur 2 lignes (scrollHeight > une ligne) ou dépasse la largeur, on réduit
+      // Réduire la police jusqu'au minimum
       while (el.scrollWidth > el.clientWidth && size > minSize) {
         size -= 0.5;
         el.style.fontSize = size + 'px';
+      }
+
+      // Si ça déborde encore au minimum, on autorise le retour à la ligne
+      if (el.scrollWidth > el.clientWidth) {
+        el.style.whiteSpace = 'normal';
+        el.style.fontSize = minSize + 'px';
       }
     });
   }
