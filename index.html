@@ -692,17 +692,24 @@
   .cv-avatar-mobile { display: none; }
 
   @media (max-width: 700px) {
-    .cv-hobby-avatar-row { align-items: stretch; }
-    .cv-avatar-mobile {
+    .cv-hobby-avatar-row {
       display: flex;
       align-items: flex-end;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: -2rem;
+    }
+    .cv-hobby-list {
+      flex: 1;
+    }
+    .cv-avatar-mobile {
+      display: block;
       flex-shrink: 0;
+      align-self: flex-end;
     }
     .cv-avatar-mobile img {
-      width: 140px;
-      height: 100%;
-      object-fit: contain;
-      object-position: bottom;
+      width: 150px;
+      height: auto;
       display: block;
       margin: 0;
       padding: 0;
