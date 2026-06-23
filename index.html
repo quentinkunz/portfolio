@@ -363,16 +363,20 @@
     bottom: 0;
     left: 0;
     line-height: 0;
+    width: 100%;
   }
   .cv-avatar-wrap img {
-    width: 180px;
+    width: 160px;
+    max-height: 200px;
     height: auto;
+    object-fit: contain;
+    object-position: bottom;
     display: block;
     margin: 0;
     padding: 0;
   }
   @media (max-width: 900px) {
-    .cv-avatar-wrap img { width: 140px; }
+    .cv-avatar-wrap img { width: 130px; max-height: 170px; }
   }
   @media (max-width: 700px) {
     .cv-avatar-wrap {
@@ -381,9 +385,11 @@
       left: auto;
       margin-top: 1rem;
       text-align: center;
+      width: auto;
     }
     .cv-avatar-wrap img {
       width: 120px;
+      max-height: none;
       margin: 0 auto;
     }
   }
