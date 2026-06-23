@@ -358,7 +358,22 @@
     .cv-main { order: 1; }
   }
 
-  /* Anti-débordement horizontal global du CV */
+  .cv-avatar-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    line-height: 0;
+  }
+  @media (max-width: 700px) {
+    .cv-avatar-wrap {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      margin-top: 1rem;
+      text-align: center;
+    }
+    .cv-avatar-wrap img { margin: 0 auto; }
+  }
   .cv-wrap, .cv-body, .cv-sidebar, .cv-main,
   .cv-comp-tags, .cv-tools-group, .cv-section {
     min-width: 0;
@@ -1286,8 +1301,8 @@
             </div>
           </div>
 
-          <div style="position:absolute;bottom:-1px;left:0;line-height:0;font-size:0;">
-            <img src="avatar.png" alt="" style="width:110px;height:auto;object-fit:contain;display:block;margin:0;padding:0;vertical-align:bottom;" onerror="this.style.display='none'">
+          <div class="cv-avatar-wrap">
+            <img src="avatar.png" alt="" style="width:110px;height:auto;object-fit:contain;display:block;margin:0;padding:0;" onerror="this.style.display='none'">
           </div>
 
         </div>
