@@ -364,6 +364,16 @@
     left: 0;
     line-height: 0;
   }
+  .cv-avatar-wrap img {
+    width: 180px;
+    height: auto;
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+  @media (max-width: 900px) {
+    .cv-avatar-wrap img { width: 140px; }
+  }
   @media (max-width: 700px) {
     .cv-avatar-wrap {
       position: relative;
@@ -372,7 +382,10 @@
       margin-top: 1rem;
       text-align: center;
     }
-    .cv-avatar-wrap img { margin: 0 auto; }
+    .cv-avatar-wrap img {
+      width: 120px;
+      margin: 0 auto;
+    }
   }
   .cv-wrap, .cv-body, .cv-sidebar, .cv-main,
   .cv-comp-tags, .cv-tools-group, .cv-section {
@@ -1302,7 +1315,7 @@
           </div>
 
           <div class="cv-avatar-wrap">
-            <img src="avatar.png" alt="" style="width:110px;height:auto;object-fit:contain;display:block;margin:0;padding:0;" onerror="this.style.display='none'">
+            <img src="avatar.png" alt="" onerror="this.style.display='none'">
           </div>
 
         </div>
